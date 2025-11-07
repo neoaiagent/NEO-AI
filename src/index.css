@@ -1,0 +1,140 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --aes-blue: #0573AC;
+  --prussian-blue: #013353;
+  --white: #FFFFFF;
+  --light-gray: #F8F9FB;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-gray-900;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-semibold;
+}
+
+h1 {
+  @apply text-3xl;
+}
+
+h2 {
+  @apply text-2xl;
+}
+
+h3 {
+  @apply text-xl;
+}
+
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.section {
+  @apply py-16;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-md p-6 transition-all hover:shadow-lg;
+}
+
+.btn-primary {
+  @apply bg-[#0573AC] text-white px-6 py-3 rounded-lg font-medium transition-all hover:bg-[#045a8d] focus:outline-none focus:ring-2 focus:ring-[#0573AC] focus:ring-offset-2;
+}
+
+.btn-secondary {
+  @apply bg-white text-[#0573AC] border-2 border-[#0573AC] px-6 py-3 rounded-lg font-medium transition-all hover:bg-[#F8F9FB] focus:outline-none focus:ring-2 focus:ring-[#0573AC] focus:ring-offset-2;
+}
+
+.btn-ghost {
+  @apply bg-transparent text-gray-700 px-4 py-2 rounded-lg font-medium transition-all hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0573AC] focus:border-transparent transition-all;
+}
+
+.nav-item {
+  @apply flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 font-medium transition-all hover:bg-[#F8F9FB] cursor-pointer;
+}
+
+.nav-item.is-active {
+  @apply bg-[#0573AC] text-white hover:bg-[#045a8d];
+}
+
+.grid-4 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4;
+}
+
+.stat .value {
+  @apply text-2xl font-bold text-[#0573AC] mt-2;
+}
+
+.history-card {
+  @apply bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg cursor-pointer;
+}
+
+.history-card .thumb {
+  @apply w-full h-40 object-cover;
+}
+
+.history-card .meta {
+  @apply p-4;
+}
+
+.history-card .title {
+  @apply font-semibold text-gray-900 mb-1;
+}
+
+.history-card .sub {
+  @apply text-xs text-gray-500;
+}
+
+.breadcrumb {
+  @apply flex items-center gap-2 text-sm text-gray-600 mb-4;
+}
+
+.sticky-actions {
+  @apply sticky bottom-0 bg-white border-t border-gray-200 p-4 flex gap-3 justify-end shadow-lg;
+}
+
+.mono {
+  @apply font-mono text-xs bg-gray-100 p-4 rounded-lg overflow-x-auto;
+}
+
+.help {
+  @apply text-xs text-gray-500 mt-1;
+}
+
+.th-cell {
+  @apply px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+}
+
+.td-cell {
+  @apply px-6 py-4 whitespace-nowrap text-sm text-gray-700;
+}
+
+.status-badge {
+  @apply px-2 inline-flex text-xs leading-5 font-semibold rounded-full;
+}
+
+.status-completed {
+  @apply bg-green-100 text-green-800;
+}
+
+.status-failed {
+  @apply bg-red-100 text-red-800;
+}
