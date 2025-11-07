@@ -28,12 +28,19 @@ export const AuthProvider = ({ children }) => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        if (event === 'SIGNED_IN' && session) {
+          // Show success toast for successful login (including OAuth)
+          toast({
+            title: "Login successful!",
+            description: "Welcome to NeoAI",
+          });
+        }
         handleSession(session);
       }
     );
 
     return () => subscription.unsubscribe();
-  }, [handleSession]);
+  }, [handleSession, toast]);
 
   const signUp = useCallback(async (email, password, options) => {
     const { error } = await supabase.auth.signUp({

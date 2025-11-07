@@ -32,6 +32,17 @@ const Dashboard = () => {
   const [historyItem, setHistoryItem] = useState(null);
   
   useEffect(() => {
+    // Handle OAuth callback - clean up URL hash after authentication
+    if (window.location.hash) {
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      if (hashParams.get('access_token')) {
+        // Clean up the URL hash after OAuth callback
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     if (!authLoading && !user) {
       navigate('/login');
     }
@@ -113,11 +124,22 @@ const Dashboard = () => {
           </aside>
           
           <main className="flex-1 overflow-y-auto">
-            {activeView === 'home' ? (
-              <DashboardHome onHistoryItemClick={handleHistoryItemClick} />
-            ) : (
-              <ToolWorkspace tool={selectedTool} onBack={handleBackHome} historyItem={historyItem} />
-            )}
+            {authLoading ? (
+              <div className="flex items-center justify-center h-full">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0573AC] mx-auto mb-4"></div>
+                  <p className="text-gray-600">Loading...</p>
+                </div>
+              </div>
+            ) : user ? (
+              <>
+                {activeView === 'home' ? (
+                  <DashboardHome onHistoryItemClick={handleHistoryItemClick} />
+                ) : (
+                  <ToolWorkspace tool={selectedTool} onBack={handleBackHome} historyItem={historyItem} />
+                )}
+              </>
+            ) : null}
           </main>
         </div>
       </div>
