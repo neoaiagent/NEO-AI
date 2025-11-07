@@ -1,0 +1,4 @@
+## Pages
+- [Account - NeoAI](/account): Manage your NeoAI account settings and billing
+- [Login - NeoAI](/login): Sign in to continue your ideas and recent projects with AI.
+- [NeoAI - Super AI for Every Generation](/landing): Build your ideas, business, and creativity with a single platform. Horizon Hosting unifies the power of AI, design, and automation in one place.
