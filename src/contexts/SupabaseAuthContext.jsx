@@ -92,40 +92,22 @@ export const AuthProvider = ({ children }) => {
   }, [toast]);
 
   const signInWithGoogle = useCallback(async () => {
-    try {
-      // Get the current origin and construct redirect URL
-      const redirectUrl = `${window.location.origin}/dashboard`;
-      
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: redirectUrl,
-          skipBrowserRedirect: false,
-        },
-      });
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard`,
+      },
+    });
 
-      if (error) {
-        console.error('OAuth error:', error);
-        toast({
-          variant: "destructive",
-          title: "Google Sign In Failed",
-          description: error.message || "Please check your Supabase configuration. Make sure the redirect URL is whitelisted in Supabase dashboard.",
-        });
-        return { error };
-      }
-
-      // OAuth redirect will happen automatically via data.url
-      // The browser will navigate to Google, then back to redirectUrl
-      return { error: null, data };
-    } catch (err) {
-      console.error('OAuth exception:', err);
+    if (error) {
       toast({
         variant: "destructive",
         title: "Google Sign In Failed",
-        description: err.message || "An unexpected error occurred. Please check your Supabase OAuth configuration.",
+        description: error.message || "Something went wrong",
       });
-      return { error: err };
     }
+
+    return { error };
   }, [toast]);
 
   const resetPassword = useCallback(async (email) => {

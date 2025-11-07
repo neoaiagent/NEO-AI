@@ -32,35 +32,15 @@ const Dashboard = () => {
   const [historyItem, setHistoryItem] = useState(null);
   
   useEffect(() => {
-    // Handle OAuth callback - process hash and clean up URL
-    const handleOAuthCallback = async () => {
-      if (window.location.hash) {
-        const hashParams = new URLSearchParams(window.location.hash.substring(1));
-        const accessToken = hashParams.get('access_token');
-        const error = hashParams.get('error');
-        const errorDescription = hashParams.get('error_description');
-
-        if (error) {
-          toast({
-            variant: "destructive",
-            title: "Authentication Error",
-            description: errorDescription || error || "Failed to authenticate with Google",
-          });
-          // Clean up URL
-          window.history.replaceState(null, '', window.location.pathname);
-          return;
-        }
-
-        if (accessToken) {
-          // Supabase will automatically handle the token from the hash
-          // Just clean up the URL
-          window.history.replaceState(null, '', window.location.pathname);
-        }
+    // Handle OAuth callback - clean up URL hash after authentication
+    if (window.location.hash) {
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      if (hashParams.get('access_token')) {
+        // Clean up the URL hash after OAuth callback
+        window.history.replaceState(null, '', window.location.pathname);
       }
-    };
-
-    handleOAuthCallback();
-  }, [toast]);
+    }
+  }, []);
 
   useEffect(() => {
     if (!authLoading && !user) {
